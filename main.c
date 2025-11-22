@@ -1,10 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-
+#include "funcoes_principais.h"
+#include "funcoes_auxiliares.h"
+#include "estruturas.h"
 
 int main(){
+
+    int numeroEventos = 0;
+    struct Evento *vetor = NULL;
+
+    carregar_arquivo(&vetor, &numeroEventos);
+
     int rodaPrograma = 1;
     while(rodaPrograma){
         printf("------------------ Menu de texto ------------------\n\n");
@@ -26,10 +33,10 @@ int main(){
         switch(escolha){
 
         case 1:
-            // cadrastrar();
+            cadastrar_eventos(&vetor, &numeroEventos);  
             break;
         case 2:
-            // mostrar_todos();
+            mostrar_todos(vetor, numeroEventos);
             break;
         case 3:
             // mostrar_datas();
@@ -51,3 +58,6 @@ int main(){
 
     }
 }
+
+
+
