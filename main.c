@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+
+int main(){
+    int rodaPrograma = 1;
+    while(rodaPrograma){
+        printf("------------------ Menu de texto ------------------\n\n");
+
+        printf("A seguir digite o valor para: \n");
+        printf("1. Cadastrar (somente um) novo evento na agenda \n");
+        printf("2. Mostrar todos os eventos da agenda \n");
+        printf("3. Mostrar eventos com dada uma data \n");
+        printf("4. Mostrar eventos com dada descrição \n");
+        printf("5. Remover evento \n");
+        printf("6. Sair \n");
+
+        printf("\n----------------------------------------------------\n");
+        
+        int escolha;
+        scanf("%d", &escolha);
+        if(escolha > 6 || escolha < 1) escolha = 7;
+
+        switch(escolha){
+
+        case 1:
+            // cadrastrar();
+            break;
+        case 2:
+            // mostrar_todos();
+            break;
+        case 3:
+            // mostrar_datas();
+            break;
+        case 4: 
+            // mostrar_descricao();
+            break;
+        case 5: 
+            printf("remover_evento() \n");
+            break;
+        case 6:
+            rodaPrograma = 0;
+            // salva_libera();
+            break;
+        case 7:
+            printf("Você digitou um elemento inválido, digite novamente \n");
+            break;
+        }
+
+    }
+}
