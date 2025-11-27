@@ -6,6 +6,7 @@
 #include "estruturas.h"
 
 void cadastrar_eventos(struct Evento **vetor, int *numeroEventos){
+    ordenar_eventos(*vetor, *numeroEventos);
     struct Evento novo;
 
     printf("Digite o dia, mês e ano do evento: ");
@@ -90,17 +91,8 @@ void cadastrar_eventos(struct Evento **vetor, int *numeroEventos){
 
 
     FILE *f = fopen("eventos.txt", "a");
-
-    if(!f){
-        printf("Erro ao abrir arquivo para salvar!\n");
-        return;
-    }
-
-    fprintf(f, "%02d/%02d/%04d\n", novo.data.dia, novo.data.mes, novo.data.ano);
-    fprintf(f, "Horário inicial: %02d:%02d\n", novo.inicio.hora, novo.inicio.minuto);
-    fprintf(f, "Horário final: %02d:%02d\n", novo.fim.hora, novo.fim.minuto);
-    fprintf(f, "Descrição: %s\n", novo.descricao);
-    fprintf(f, "Local: %s\n\n", novo.local);
+    ordenar_eventos(*vetor, *numeroEventos);
+    salvar_arquivo(*vetor, *numeroEventos);
 
     fclose(f);
     printf("Evento cadastrado com sucesso!\n");

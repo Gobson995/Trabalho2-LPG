@@ -11,7 +11,9 @@ int main(){
     struct Evento *vetor = NULL;
 
     carregar_arquivo(&vetor, &numeroEventos);
-
+    ordenar_eventos(vetor, numeroEventos);
+    salvar_arquivo(vetor, numeroEventos);
+    
     int rodaPrograma = 1;
     while(rodaPrograma){
         printf("------------------ Menu de texto ------------------\n\n");

@@ -23,6 +23,8 @@ int horario_valido(int hora, int minuto){
 }
 
 void carregar_arquivo(struct Evento **vetor, int *numeroEventos){
+    
+    ordenar_eventos(*vetor, *numeroEventos);
     FILE *f = fopen("eventos.txt", "r");
 
     if(f == NULL){
@@ -103,7 +105,6 @@ void carregar_arquivo(struct Evento **vetor, int *numeroEventos){
         (*numeroEventos)++;
     }
 
-    ordenar_eventos(*vetor, *numeroEventos);
     fclose(f);
 }
 
@@ -129,4 +130,23 @@ void ordenar_eventos(struct Evento *vetor, int numeroEventos){
             }
         }
     }
+}
+
+void salvar_arquivo(struct Evento *vetor, int numeroEventos){
+    FILE *f = fopen("eventos.txt", "w");
+    if(f == NULL){
+        printf("Erro ao abrir arquivo para salvar!\n");
+        return;
+    }
+
+    for(int i = 0;i < numeroEventos;i++){
+        struct Evento evento = vetor[i];
+        fprintf(f, "%02d/%02d/%04d\n", evento.data.dia, evento.data.mes, evento.data.ano);
+        fprintf(f, "Horário inicial: %02d:%02d\n", evento.inicio.hora, evento.inicio.minuto);
+        fprintf(f, "Horário final: %02d:%02d\n", evento.fim.hora, evento.fim.minuto);
+        fprintf(f, "Descrição: %s\n", evento.descricao);
+        fprintf(f, "Local: %s\n\n", evento.local);
+    }
+
+    fclose(f);
 }
