@@ -16,7 +16,14 @@ int data_valida(int dia, int mes, int ano){
 
     return 1;
 }
-
+int data_equals(Data a, Data b) {
+    return a.dia == b.dia &&
+           a.mes == b.mes &&
+           a.ano == b.ano;
+}
+int horario_equals(Horario a, Horario b) {
+    return a.hora == b.hora && a.minuto == b.minuto;
+}
 int horario_valido(int hora, int minuto){
     if(hora >= 24 || hora < 0 || minuto >= 60 || minuto < 0) return 0;
     return 1;

@@ -9,5 +9,5 @@ int horario_valido(int hora, int minuto);
 void ordenar_eventos(struct Evento *vetor, int numeroEventos);
 int compara_eventos(struct Evento a, struct Evento b);
 void salvar_arquivo(struct Evento *vetor, int numeroEventos);
-
+int dataEquals(Data a, Data b);
 #endif
