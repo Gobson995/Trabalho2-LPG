@@ -41,10 +41,10 @@ int main(){
             mostrar_todos(vetor, numeroEventos);
             break;
         case 3:
-            // mostrar_datas();
+            mostrar_data(vetor, numeroEventos);
             break;
         case 4: 
-            // mostrar_descricao();
+            mostrar_descricao(vetor, numeroEventos);
             break;
         case 5: 
             printf("remover_evento() \n");
