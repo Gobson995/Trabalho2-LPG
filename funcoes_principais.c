@@ -123,6 +123,109 @@ void mostrar_todos(struct Evento *vetor, int numeroEventos){
     }
 }
 
+void mostrar_data (struct Evento *vetor, int numeroEventos) {
+    if (numeroEventos == 0) {
+        printf("Nenhum evento cadastrado na agenda. \n");
+        return;
+    }
 
+    int dia, mes, ano;
+    printf("Digite a data que deseja buscar (dia mes ano): ");
+    scanf("%d %d %d", &dia, &mes, &ano);
+
+    if (!data_valida(dia, mes, ano)) {
+        printf("Data inválida.\n");
+        return;
+    }
+
+    struct Evento inicioBusca;
+    inicioBusca.data.dia = dia;
+    inicioBusca.data.mes = mes;
+    inicioBusca.data.ano = ano;
+    inicioBusca.inicio.hora = 0;
+    inicioBusca.inicio.minuto = 0;
+
+    struct Evento fimBusca;
+    fimBusca.data.dia = dia;
+    fimBusca.data.mes = mes;
+    fimBusca.data.ano = ano;
+    fimBusca.inicio.hora = 23;
+    fimBusca.inicio.minuto = 59;
+
+    int encontrou = 0;
+
+    printf("\n Evento do dia %02d/%02d/%04d \n\n", dia, mes, ano);
+    
+    struct Evento *atual = NULL;
+
+    int j = 0;
+
+    for (int i = 0; i < numeroEventos; i++) {
+
+        if (compara_eventos(vetor[i], inicioBusca) >= 0 && compara_eventos(vetor[i], fimBusca) <= 0) {
+            encontrou = 1;
+
+            struct Evento *aux = realloc(atual, (j + 1) * sizeof(struct Evento));
+            atual = aux;
+            atual[j] = vetor[i];
+            j++;
+        } 
+    }
+
+    if (!encontrou) {
+        printf("Nenhum evento encontrado nesta data.\n");
+        return;
+    }
+
+    mostrar_todos(atual, j);
+    free(atual);
+}
+
+void mostrar_descricao(struct Evento *vetor, int numeroEventos) {
+    if(numeroEventos == 0) {
+        printf("Nenhum evento cadastrado na agenda.\n");
+        return;
+    }
+
+    char descricaoBusca[50];
+
+    getchar(); 
+    printf("Digite a descrição que deseja buscar: ");
+    fgets(descricaoBusca, sizeof(descricaoBusca), stdin);
+    descricaoBusca[strcspn(descricaoBusca, "\n")] = '\0';
+
+    int encontrou = 0;
+
+    struct Evento *atual = NULL;
+    int j = 0;
+
+    for (int i = 0; i < numeroEventos; i++) {
+        if(strstr(vetor[i].descricao, descricaoBusca) != NULL) {
+            encontrou = 1;
+
+            struct Evento *aux = realloc(atual, (j+1) * sizeof(struct Evento));
+
+            if (aux == NULL) {
+                printf("Erro de memória.\n");
+                free(atual);
+                return;
+            }
+
+            atual = aux;
+            atual[j] = vetor[i];
+            j++;
+        }
+    }
+
+    if(!encontrou){
+        printf("Nenhum evento encontrado contendo \"%s\".\n", descricaoBusca);
+        return;
+    }
+
+    printf("\n----- Eventos contendo \"%s\" -----\n\n", descricaoBusca);
+
+    mostrar_todos(atual, j);
+    free(atual);
+}
 
 
