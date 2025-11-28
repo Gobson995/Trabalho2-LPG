@@ -227,5 +227,51 @@ void mostrar_descricao(struct Evento *vetor, int numeroEventos) {
     mostrar_todos(atual, j);
     free(atual);
 }
+void remover_evento(struct Evento *vetor, int numeroEventos) {
+    if(numeroEventos == 0) {
+        printf("Nenhum evento cadastrado na agenda.\n");
+        return;
+    }
+
+    Data dataEvento;Horario hora;
+    printf("Digite a dataEvento do evento para remover:\n ");
+    printf("Dia: ");
+    scanf(dataEvento.dia);
+    printf("\nMes: ");
+    scanf(dataEvento.mes);
+    printf("\nAno: ");
+    scanf(dataEvento.ano);
+    printf("Digite o horario do evento para remover: ");
+    printf("Hora: ");
+    scanf(hora.hora);
+    printf("Minuto: ");
+    scanf(hora.minuto);
+
+    int encontrou = 0;
+
+    struct Evento *atual = NULL;
+    int j = 0;
+
+    for (int i = 0; i < numeroEventos; i++) {
+        if(data_equals(dataEvento,vetor[i].data)) {
+            encontrou = 1;
+            if(horario_equals(hora,vetor[i].inicio)) {
+                for(int j = i;j<numeroEventos-1;j++){
+                    vetor[j] = vetor[j + 1];
+                }
+                numeroEventos--;
+            }
+        }
+    }
+
+    if(!encontrou){
+        printf("Nenhum evento encontrado na data \"%02d/%02d/%04d\".\n",
+        dataEvento.dia, dataEvento.mes, dataEvento.ano);
+        return;
+    }else{
+        printf("Evento encontrado na data \"%02d/%02d/%04d\" e removido com sucesso.\n",
+        dataEvento.dia, dataEvento.mes, dataEvento.ano);
+    }
+}
 
 
