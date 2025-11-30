@@ -258,12 +258,10 @@ void remover_evento(struct Evento **vetor, int *numeroEventos) {
             
             encontrou = 1;
             
-            // Move todos os elementos uma posição para trás
             for(int j = i; j < *numeroEventos - 1; j++){
                 (*vetor)[j] = (*vetor)[j + 1];
             }
             
-            // Realoca para menos
             (*numeroEventos)--;
             struct Evento *aux = realloc(*vetor, (*numeroEventos) * sizeof(struct Evento));
             if(*numeroEventos > 0 || aux != NULL) {
