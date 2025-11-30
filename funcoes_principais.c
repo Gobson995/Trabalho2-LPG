@@ -237,13 +237,13 @@ void remover_evento(struct Evento **vetor, int *numeroEventos) {
     Horario horaEvento;
     printf("Digite o dia, mês e ano do evento: ");
     scanf("%d %d %d", &dataEvento.dia, &dataEvento.mes, &dataEvento.ano);
-    if(!data_valida(&dataEvento.dia, &dataEvento.mes, &dataEvento.ano)){
+    if(!data_valida(dataEvento.dia, dataEvento.mes, dataEvento.ano)){
         printf("Data inválida \n");
         return;
     }
     printf("Digite o hora, minuto do evento: ");
     scanf("%d %d ", &horaEvento.hora, &horaEvento.minuto);
-    if(!horario_valido(&horaEvento.hora, &horaEvento.minuto)){
+    if(!horario_valido(horaEvento.hora, horaEvento.minuto)){
         printf("Data inválida \n");
         return;
     }
