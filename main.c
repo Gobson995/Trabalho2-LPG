@@ -51,7 +51,8 @@ int main(){
             break;
         case 6:
             rodaPrograma = 0;
-            // salva_libera();
+            salvar_arquivo(vetor, numeroEventos);
+            free(vetor);
             break;
         case 7:
             printf("Você digitou um elemento inválido, digite novamente \n");
