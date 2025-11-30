@@ -227,51 +227,57 @@ void mostrar_descricao(struct Evento *vetor, int numeroEventos) {
     mostrar_todos(atual, j);
     free(atual);
 }
-void remover_evento(struct Evento *vetor, int numeroEventos) {
-    if(numeroEventos == 0) {
+void remover_evento(struct Evento **vetor, int *numeroEventos) {
+    if(*numeroEventos == 0) {
         printf("Nenhum evento cadastrado na agenda.\n");
         return;
     }
 
-    Data dataEvento;Horario hora;
-    printf("Digite a dataEvento do evento para remover:\n ");
+    Data dataEvento;
+    Horario hora;
+    
+    printf("Digite a data do evento para remover:\n");
     printf("Dia: ");
-    scanf(dataEvento.dia);
-    printf("\nMes: ");
-    scanf(dataEvento.mes);
-    printf("\nAno: ");
-    scanf(dataEvento.ano);
-    printf("Digite o horario do evento para remover: ");
+    scanf("%d", &dataEvento.dia);
+    printf("Mes: ");
+    scanf("%d", &dataEvento.mes);
+    printf("Ano: ");
+    scanf("%d", &dataEvento.ano);
+    
+    printf("Digite o horario do evento para remover:\n");
     printf("Hora: ");
-    scanf(hora.hora);
+    scanf("%d", &hora.hora);
     printf("Minuto: ");
-    scanf(hora.minuto);
+    scanf("%d", &hora.minuto);
 
     int encontrou = 0;
 
-    struct Evento *atual = NULL;
-    int j = 0;
-
-    for (int i = 0; i < numeroEventos; i++) {
-        if(data_equals(dataEvento,vetor[i].data)) {
+    for (int i = 0; i < *numeroEventos; i++) {
+        if(data_equals(dataEvento, (*vetor)[i].data) && 
+           horario_equals(hora, (*vetor)[i].inicio)) {
+            
             encontrou = 1;
-            if(horario_equals(hora,vetor[i].inicio)) {
-                for(int j = i;j<numeroEventos-1;j++){
-                    vetor[j] = vetor[j + 1];
-                }
-                numeroEventos--;
+            
+            // Move todos os elementos uma posição para trás
+            for(int j = i; j < *numeroEventos - 1; j++){
+                (*vetor)[j] = (*vetor)[j + 1];
             }
+            
+            // Realoca para menos
+            (*numeroEventos)--;
+            struct Evento *aux = realloc(*vetor, (*numeroEventos) * sizeof(struct Evento));
+            if(*numeroEventos > 0 || aux != NULL) {
+                *vetor = aux;
+            }
+            
+            printf("Evento removido com sucesso!\n");
+            salvar_arquivo(*vetor, *numeroEventos);
+            break;
         }
     }
 
     if(!encontrou){
-        printf("Nenhum evento encontrado na data \"%02d/%02d/%04d\".\n",
-        dataEvento.dia, dataEvento.mes, dataEvento.ano);
-        return;
-    }else{
-        printf("Evento encontrado na data \"%02d/%02d/%04d\" e removido com sucesso.\n",
-        dataEvento.dia, dataEvento.mes, dataEvento.ano);
+        printf("Nenhum evento encontrado na data \"%02d/%02d/%04d\" às %02d:%02d.\n",
+               dataEvento.dia, dataEvento.mes, dataEvento.ano, hora.hora, hora.minuto);
     }
 }
-
-

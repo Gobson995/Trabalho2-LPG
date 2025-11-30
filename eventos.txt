@@ -16,9 +16,3 @@ Horário final: 12:30
 Descrição: nascimento
 Local: rua 
 
-12/04/2007
-Horário inicial: 16:00
-Horário final: 18:00
-Descrição: jogo do jec
-Local: arena
-

@@ -47,7 +47,7 @@ int main(){
             mostrar_descricao(vetor, numeroEventos);
             break;
         case 5: 
-            remover_evento(vetor,numeroEventos);
+             remover_evento(&vetor, &numeroEventos);
             break;
         case 6:
             rodaPrograma = 0;

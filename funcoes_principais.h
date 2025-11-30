@@ -6,8 +6,8 @@
 
 void cadastrar_eventos(struct Evento **vetor, int *numeroEventos);
 void mostrar_todos(struct Evento *vetor, int numeroEventos);
-void mostrar_data(struct Evento *vetor, int nemeroEventos);
+void mostrar_data(struct Evento *vetor, int numeroEventos);  
 void mostrar_descricao(struct Evento *vetor, int numeroEventos);
-void remover_evento(struct Evento *vetor, int numeroEventos);
+void remover_evento(struct Evento **vetor, int *numeroEventos);
 
 #endif
