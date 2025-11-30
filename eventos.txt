@@ -4,12 +4,6 @@ Horário final: 12:30
 Descrição: ola
 Local: mundo
 
-13/01/2007
-Horário inicial: 14:00
-Horário final: 15:00
-Descrição: nascimento gustavo
-Local: criciuma
-
 12/04/2007
 Horário inicial: 12:04
 Horário final: 12:30
