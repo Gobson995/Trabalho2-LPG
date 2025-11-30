@@ -241,8 +241,8 @@ void remover_evento(struct Evento **vetor, int *numeroEventos) {
         printf("Data inválida \n");
         return;
     }
-    printf("Digite a hora, minuto: ");
-    scanf("%d %d", &horaEvento.hora, &horaEvento.minuto);
+    printf("Digite o hora, minuto do evento: ");
+    scanf("%d %d ", &horaEvento.hora, &horaEvento.minuto);
     if(!horario_valido(&horaEvento.hora, &horaEvento.minuto)){
         printf("Data inválida \n");
         return;
@@ -271,6 +271,6 @@ void remover_evento(struct Evento **vetor, int *numeroEventos) {
 
     if(!encontrou){
         printf("Nenhum evento encontrado na data \"%02d/%02d/%04d\" às %02d:%02d.\n",
-               dataEvento.dia, dataEvento.mes, dataEvento.ano, horaEvento.hora, horaEvento.minuto);
+               dataEvento.dia, dataEvento.mes, dataEvento.ano, hora.hora, hora.minuto);
     }
 }
