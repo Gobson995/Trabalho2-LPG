@@ -234,40 +234,36 @@ void remover_evento(struct Evento **vetor, int *numeroEventos) {
     }
 
     Data dataEvento;
-    Horario hora;
+    Horario horaEvento;
     
-    printf("Digite a data do evento para remover:\n");
-    printf("Dia: ");
-    scanf("%d", &dataEvento.dia);
-    printf("Mes: ");
-    scanf("%d", &dataEvento.mes);
-    printf("Ano: ");
-    scanf("%d", &dataEvento.ano);
-    
-    printf("Digite o horario do evento para remover:\n");
-    printf("Hora: ");
-    scanf("%d", &hora.hora);
-    printf("Minuto: ");
-    scanf("%d", &hora.minuto);
-
+   printf("Digite o dia, mês e ano do evento: ");
+    scanf("%d %d %d", &dataEvento.dia, &dataEvento.mes, &dataEvento.ano);
+    if(!data_valida(&dataEvento.dia, &dataEvento.mes, &dataEvento.ano)){
+        printf("Data inválida \n");
+        return;
+    }
+    printf("Digite o hora, minuto do evento: ");
+    scanf("%d %d ", &horaEvento.hora, &horaEvento.minuto);
+    if(!horario_valido(&horaEvento.hora, &horaEvento.minuto)){
+        printf("Data inválida \n");
+        return;
+    }
     int encontrou = 0;
 
     for (int i = 0; i < *numeroEventos; i++) {
         if(data_equals(dataEvento, (*vetor)[i].data) && 
-           horario_equals(hora, (*vetor)[i].inicio)) {
+           horario_equals(horaEvento, (*vetor)[i].inicio)) {
             
             encontrou = 1;
             
             for(int j = i; j < *numeroEventos - 1; j++){
                 (*vetor)[j] = (*vetor)[j + 1];
             }
-            
             (*numeroEventos)--;
             struct Evento *aux = realloc(*vetor, (*numeroEventos) * sizeof(struct Evento));
             if(*numeroEventos > 0 || aux != NULL) {
                 *vetor = aux;
             }
-            
             printf("Evento removido com sucesso!\n");
             salvar_arquivo(*vetor, *numeroEventos);
             break;
@@ -276,6 +272,6 @@ void remover_evento(struct Evento **vetor, int *numeroEventos) {
 
     if(!encontrou){
         printf("Nenhum evento encontrado na data \"%02d/%02d/%04d\" às %02d:%02d.\n",
-               dataEvento.dia, dataEvento.mes, dataEvento.ano, hora.hora, hora.minuto);
+               dataEvento.dia, dataEvento.mes, dataEvento.ano, horaEvento.hora, horaEvento.minuto);
     }
 }
