@@ -271,6 +271,6 @@ void remover_evento(struct Evento **vetor, int *numeroEventos) {
 
     if(!encontrou){
         printf("Nenhum evento encontrado na data \"%02d/%02d/%04d\" às %02d:%02d.\n",
-               dataEvento.dia, dataEvento.mes, dataEvento.ano, hora.hora, hora.minuto);
+               dataEvento.dia, dataEvento.mes, dataEvento.ano, horaEvento.hora, horaEvento.minuto);
     }
 }
