@@ -6,7 +6,9 @@
 #include "estruturas.h"
 
 void cadastrar_eventos(struct Evento **vetor, int *numeroEventos){
+    
     ordenar_eventos(*vetor, *numeroEventos);
+    
     struct Evento novo;
 
     printf("Digite o dia, mês e ano do evento: ");
@@ -40,11 +42,11 @@ void cadastrar_eventos(struct Evento **vetor, int *numeroEventos){
 
     getchar();
 
-    printf("Digite a descrição: ");
+    printf("Digite a descrição (max. 50 caracteres): ");
     fgets(novo.descricao, sizeof(novo.descricao), stdin);
     novo.descricao[strcspn(novo.descricao, "\n")] = '\0';
 
-    printf("Digite o local: ");
+    printf("Digite o local (max. 50 caracteres): ");
     fgets(novo.local, sizeof(novo.local), stdin);
     novo.local[strcspn(novo.local, "\n")] = '\0';
 
@@ -89,9 +91,7 @@ void cadastrar_eventos(struct Evento **vetor, int *numeroEventos){
     (*numeroEventos)++;
     ordenar_eventos(*vetor, *numeroEventos);
 
-
     FILE *f = fopen("eventos.txt", "a");
-    ordenar_eventos(*vetor, *numeroEventos);
     salvar_arquivo(*vetor, *numeroEventos);
 
     fclose(f);
@@ -241,7 +241,7 @@ void remover_evento(struct Evento **vetor, int *numeroEventos){
 
     struct Evento verifica;
     
-    printf("Digite o dia, mês e ano do evento: (xx xx xxxx)");
+    printf("Digite o dia, mês e ano do evento: (dia mes ano)");
     scanf("%d %d %d", &verifica.data.dia, &verifica.data.mes, &verifica.data.ano);
     
     if(!data_valida(verifica.data.dia, verifica.data.mes, verifica.data.ano)){
@@ -249,7 +249,7 @@ void remover_evento(struct Evento **vetor, int *numeroEventos){
         return;
     }
 
-    printf("Digite o horário e minuto do evento: (xx xx) ");
+    printf("Digite o horário e minuto do evento: (hora minuto) ");
     scanf("%d %d", &verifica.inicio.hora, &verifica.inicio.minuto);
     if(!horario_valido(verifica.inicio.hora, verifica.inicio.minuto)){
         printf("Horário inválido! \n");
