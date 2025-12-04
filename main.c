@@ -30,8 +30,6 @@ int main(){
         
         int escolha;
         scanf("%d", &escolha);
-        if(escolha > 6 || escolha < 1) escolha = 7;
-
         switch(escolha){
 
         case 1:
@@ -54,7 +52,7 @@ int main(){
             salvar_arquivo(vetor, numeroEventos);
             free(vetor);
             break;
-        case 7:
+        default:
             printf("Você digitou um elemento inválido, digite novamente \n");
             break;
         }

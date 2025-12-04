@@ -25,7 +25,6 @@ int horario_valido(int hora, int minuto){
 
 void carregar_arquivo(struct Evento **vetor, int *numeroEventos){
     
-    ordenar_eventos(*vetor, *numeroEventos);
     FILE *f = fopen("eventos.txt", "r");
 
     if(f == NULL){
